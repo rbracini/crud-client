@@ -2,18 +2,22 @@ package tech.curtiu.crud_client.dtos;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import tech.curtiu.crud_client.entities.Client;
 
 public class ClientDTO {
 
     private Long id;
 
+    @NotBlank(message = "Nome: não pode ser vazio")
     private String name;
 
     private String cpf;
 
     private Double income;
 
+    @PastOrPresent(message = "Data de nascimento: não pode ser data futura")
     private LocalDate birthDate;
 
     private Integer children;

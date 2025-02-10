@@ -30,8 +30,14 @@ public class ClientService {
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
         Client client = clientRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Client not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Id não encontrado"));
         ;
+        return clientMapper.toDTO(client);
+    }
+
+    public ClientDTO save(ClientDTO clientDTO) {
+        Client client = clientMapper.toEntity(clientDTO);
+        client = clientRepository.save(client);
         return clientMapper.toDTO(client);
     }
 
