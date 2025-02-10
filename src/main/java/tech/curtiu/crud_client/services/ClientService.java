@@ -10,6 +10,7 @@ import tech.curtiu.crud_client.dtos.ClientDTO;
 import tech.curtiu.crud_client.entities.Client;
 import tech.curtiu.crud_client.mappers.ClientMapper;
 import tech.curtiu.crud_client.repositories.ClientRepository;
+import tech.curtiu.crud_client.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClientService {
@@ -24,6 +25,14 @@ public class ClientService {
     public Page<ClientDTO> findAll(Pageable pageable) {
         Page<Client> clients = clientRepository.findAll(pageable);
         return clients.map(clientMapper::toDTO);
+    }
+
+    @Transactional(readOnly = true)
+    public ClientDTO findById(Long id) {
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Client not found"));
+        ;
+        return clientMapper.toDTO(client);
     }
 
 }
