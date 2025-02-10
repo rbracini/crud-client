@@ -1,0 +1,10 @@
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('48190232096','Lilian Green', 50000.0, '2000-08-31',5);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('55683664039','Fernando Alonso', 90000.0, '1991-08-21',2);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('02065991020','Elvis Presley', 1000.0, '1988-05-11',1);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('37028375072','Alex Kid', 12345.0, '2000-01-13',3);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('50242253091','Mauro Moura', 2000.0, '1991-08-03',2);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('38281449004','Claudia Leite', 10000.0, '1993-05-10',1);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('67411439045','Felipe Fernandes', 10000.0, '2001-07-25',4);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('22191179010','Valter Silva', 3000.0, '2004-04-24',3);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('86736348064','Carlos de Souza', 2500.0, '2003-11-01',3);
+INSERT INTO tb_client(cpf, name, income, birth_date, children)VALUES('68007709061','Lilian Gray', 50000.0, '2000-08-31',1);
