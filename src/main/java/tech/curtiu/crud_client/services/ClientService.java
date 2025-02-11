@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import tech.curtiu.crud_client.dtos.ClientDTO;
 import tech.curtiu.crud_client.entities.Client;
 import tech.curtiu.crud_client.mappers.ClientMapper;
@@ -35,10 +37,30 @@ public class ClientService {
         return clientMapper.toDTO(client);
     }
 
+    @Transactional
     public ClientDTO save(ClientDTO clientDTO) {
         Client client = clientMapper.toEntity(clientDTO);
-        client = clientRepository.save(client);
-        return clientMapper.toDTO(client);
+        return clientMapper.toDTO(clientRepository.save(client));
+    }
+
+    @Transactional
+    public ClientDTO update(Long id, ClientDTO clientDTO) {
+        try {
+            Client client = clientRepository.getReferenceById(id);
+            clientMapper.updateEntityFromDto(clientDTO, client);
+            return clientMapper.toDTO(clientRepository.save(client));
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id não encontrado");
+        }
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void delete(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Id não encontrado");
+        }
+        clientRepository.deleteById(id);
+
     }
 
 }

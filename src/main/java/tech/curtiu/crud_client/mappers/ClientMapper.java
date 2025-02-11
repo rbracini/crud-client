@@ -1,6 +1,8 @@
 package tech.curtiu.crud_client.mappers;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import tech.curtiu.crud_client.dtos.ClientDTO;
@@ -14,5 +16,8 @@ public interface ClientMapper {
     ClientDTO toDTO(Client client);
 
     Client toEntity(ClientDTO clientDTO);
+
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromDto(ClientDTO clientDTO, @MappingTarget Client client);
 
 }
